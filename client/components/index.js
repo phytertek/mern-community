@@ -1,7 +1,7 @@
 import App from './App'
-import Greetings from './Greetings'
+import NavigationBar from './NavigationBar'
 
 export {
   App,
-  Greetings
+  NavigationBar
 }

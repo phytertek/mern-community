@@ -5,8 +5,8 @@ import { Greetings } from '../'
 const App = React.createClass({
   render() {
     return(
-      <div>
-        <Greetings />
+      <div className="container">
+        <NavigationBar />
       </div>
     )
   }
