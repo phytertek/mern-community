@@ -1,13 +1,18 @@
 import React from 'react'
 
-import { Greetings } from '../'
+import { NavigationBar } from '../'
+
+const style = {
+  fontFamily: 'Roboto, sans-serif'
+}
 
 const App = React.createClass({
   render() {
     return(
-      <div className="container">
-        <NavigationBar />
-      </div>
+        <div style={style}>
+          <NavigationBar />
+          {this.props.children}
+        </div>
     )
   }
 })
