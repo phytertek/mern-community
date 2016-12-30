@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import map from 'lodash/map'
-
 import timezones from '../../data/timezones'
+
 
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
@@ -11,28 +10,21 @@ import Paper from 'material-ui/Paper'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
+
+import { signup } from '../../../server/shared/validations'
+
 const style = {
-  paper: {
-    padding: 15
-  },
-  container: {
-    padding: 15
-  },
-  select: {
-    width: '100%'
-  }
+  paper: { padding: 15 },
+  container: { padding: 15 },
+  select: { width: '100%' }
 }
 
 class SignupForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      timezone: '',
-      errors: {},
+      username: '',         email: '',      password: '',
+      confirmPassword: '',  timezone: '',   errors: {},           
       isLoading: false
     }
     this.onChange           =   this.onChange.bind(this)
@@ -49,17 +41,23 @@ class SignupForm extends Component {
     this.setState({ timezone: p})
   }
 
-  onSubmit(event) {
-    this.setState({ errors: {}, isLoading: true })
-    event.preventDefault()
-    console.log(this.state)
-    this.props.userSignupRequest(this.state)
-    .then((res) => {
-      console.log(res)
-      this.setState({ errors: {}, isLoading: false })
-    })
-    .catch(err => this.setState({ errors: err.response.data })    )
-    // axios.post('/api/user', { user: this.state })
+  isValid() {
+    const { errors, isValid } = signup.validateInput(this.state)
+    console.log(isValid)
+    if (!isValid) {
+      this.setState({ errors })
+    }
+    return isValid
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true })
+      this.props.userSignupRequest(this.state).then((res) => {
+        this.setState({ isLoading: false })
+      }).catch(err => this.setState({ errors: err.response.data }))
+    }
   }
 
   showState() {
@@ -67,7 +65,13 @@ class SignupForm extends Component {
   }
 
   render() {
-    const menuItems = timezones.map((tz, i) => <MenuItem id="timezone" key={i} value={tz.value} primaryText={tz.value}/>)
+    const menuItems = timezones.map((tz, i) => {
+      return (
+        <MenuItem key={i} 
+                  value={tz.value} 
+                  primaryText={tz.value}/>
+      )
+    })
     return (
       <div style={style.container}>
       <Paper zDepth={3} style={style.paper}>
