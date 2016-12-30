@@ -31,7 +31,7 @@ class NavigationBar extends Component {
         title={<span className="font-effect-3d-float" style={style.title}>Ҏ Ҥ ¥ Ț Ӭ Ԇ Ŧ Ξ Ҝ</span>}
         showMenuIconButton={false}
         onTitleTouchTap={handleTouchTap}
-        iconElementRight={<FlatButton style={style.button} className="font-effect-3d-float" label="§ ї Ԍ ∏___ц ҏ" onTouchTap={handleSignupTap}/>}
+        iconElementRight={<FlatButton style={style.button} className="font-effect-3d-float" label="§ ї Ԍ ∏ _ ц ҏ" onTouchTap={handleSignupTap}/>}
       />
     )
   }

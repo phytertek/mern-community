@@ -55,7 +55,10 @@ class SignupForm extends Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true })
       this.props.userSignupRequest(this.state).then((res) => {
-        this.setState({ isLoading: false })
+        this.props.addFlashMessage({
+          type: 'success',
+          text: 'Ҏ Ҥ ¥ Ț Ӭ Ԇ Ŧ Ξ Ҝ'
+        })
         this.context.router.push('/')
       }).catch(err => {
         this.setState({ errors: err.response.data, isLoading: false })
@@ -88,15 +91,16 @@ class SignupForm extends Component {
                   fullWidth={true}
                   value={this.state.username} 
                   onChange={this.onChange} 
-                  id="username"/>
-      
+                  id="username"
+                  className="font-effect-3d-float"/>    
       {/*Email*/}
       <TextField  errorText={this.state.errors.email} 
                   floatingLabelText="Ӭ ӎ Ѧ ị Ŀ" 
                   fullWidth={true}
                   value={this.state.email} 
                   onChange={this.onChange} 
-                  id="email"/>
+                  id="email"
+                  className="font-effect-3d-float"/>
       
       {/*Password*/}
       <TextField  errorText={this.state.errors.password} 
@@ -105,42 +109,36 @@ class SignupForm extends Component {
                   fullWidth={true}
                   value={this.state.password} 
                   onChange={this.onChange} 
-                  id="password"/>
+                  id="password"
+                  className="font-effect-3d-float"/>
         
       {/*Password Confirmation*/}
       <TextField  errorText={this.state.errors.confirmPassword} 
                   type="password" 
-                  floatingLabelText="confirm ρ д § Щ Ѻ г Đ" 
+                  floatingLabelText="Ҁ θ Π Ӻ Ị Я ḿ _  ρ д § Щ Ѻ г Đ" 
                   fullWidth={true}
                   value={this.state.confirmPassword} 
                   onChange={this.onChange} 
-                  id="confirmPassword"/>
+                  id="confirmPassword"
+                  className="font-effect-3d-float"/>
       
       {/*Timezone*/}
       <SelectField  id="timezone"
                     errorText={this.state.errors.timezone} 
-                    floatingLabelText="timezone" 
+                    floatingLabelText="Ԏ ỉ Ӎ € ζ ф Ԉ Ҽ" 
                     fullWidth={true}
                     value={this.state.timezone} 
-                    onChange={this.onChangeTimezone}>
+                    onChange={this.onChangeTimezone}
+                    className="font-effect-3d-float">
                     {menuItems}
       </SelectField>
 
       <div style={style.container}>
         <RaisedButton name="submit" 
                       disabled={this.state.isLoading}
-                      label="§ ї Ԍ ∏___ц ҏ" 
-                      primary={true} 
+                      label="§ ї Ԍ ∏ _ ц ҏ" 
                       fullWidth={true} 
                       onTouchTap={this.onSubmit}/>
-      </div>
-
-      <div style={style.container}>
-        <RaisedButton name="showstate" 
-                      label="show state"
-                      primary={true} 
-                      fullWidth={true} 
-                      onTouchTap={this.showState.bind(this)}/>
       </div>
 
       </form>
@@ -152,7 +150,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired
+  userSignupRequest: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
