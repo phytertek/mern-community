@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 
 import timezones from '../../data/timezones'
@@ -15,6 +16,7 @@ import { signup } from '../../../server/shared/validations'
 
 const style = {
   paper: { padding: 15 },
+  header: { textAlign: 'center', color: 'black' },
   container: { padding: 15 },
   select: { width: '100%' }
 }
@@ -33,7 +35,6 @@ class SignupForm extends Component {
   }
 
   onChange(e, k, p) {
-    console.log(e.target,k,p)
     this.setState({ [e.target.id]: e.target.value })
   }
 
@@ -43,7 +44,6 @@ class SignupForm extends Component {
 
   isValid() {
     const { errors, isValid } = signup.validateInput(this.state)
-    console.log(isValid)
     if (!isValid) {
       this.setState({ errors })
     }
@@ -56,7 +56,10 @@ class SignupForm extends Component {
       this.setState({ errors: {}, isLoading: true })
       this.props.userSignupRequest(this.state).then((res) => {
         this.setState({ isLoading: false })
-      }).catch(err => this.setState({ errors: err.response.data }))
+        this.context.router.push('/')
+      }).catch(err => {
+        this.setState({ errors: err.response.data, isLoading: false })
+      })
     }
   }
 
@@ -76,12 +79,12 @@ class SignupForm extends Component {
       <div style={style.container}>
       <Paper zDepth={3} style={style.paper}>
       <form>
-      <h1>Join our Community!</h1>
+      <h1 className="font-effect-3d-float" style={style.header}>Ҏ Ҥ ¥ Ț Ӭ Ԇ Ŧ Ξ Ҝ</h1>
 
       {/*Username*/}  
       <TextField  hintText="phytertek" 
                   errorText={this.state.errors.username} 
-                  floatingLabelText="username" 
+                  floatingLabelText="Ц δ Ξ я Ӣ Λ Ӎ ℓ" 
                   fullWidth={true}
                   value={this.state.username} 
                   onChange={this.onChange} 
@@ -89,7 +92,7 @@ class SignupForm extends Component {
       
       {/*Email*/}
       <TextField  errorText={this.state.errors.email} 
-                  floatingLabelText="email" 
+                  floatingLabelText="Ӭ ӎ Ѧ ị Ŀ" 
                   fullWidth={true}
                   value={this.state.email} 
                   onChange={this.onChange} 
@@ -98,7 +101,7 @@ class SignupForm extends Component {
       {/*Password*/}
       <TextField  errorText={this.state.errors.password} 
                   type="password" 
-                  floatingLabelText="password" 
+                  floatingLabelText="ρ д § Щ Ѻ г Đ" 
                   fullWidth={true}
                   value={this.state.password} 
                   onChange={this.onChange} 
@@ -107,7 +110,7 @@ class SignupForm extends Component {
       {/*Password Confirmation*/}
       <TextField  errorText={this.state.errors.confirmPassword} 
                   type="password" 
-                  floatingLabelText="confirm password" 
+                  floatingLabelText="confirm ρ д § Щ Ѻ г Đ" 
                   fullWidth={true}
                   value={this.state.confirmPassword} 
                   onChange={this.onChange} 
@@ -126,7 +129,7 @@ class SignupForm extends Component {
       <div style={style.container}>
         <RaisedButton name="submit" 
                       disabled={this.state.isLoading}
-                      label="Sign Up" 
+                      label="§ ї Ԍ ∏___ц ҏ" 
                       primary={true} 
                       fullWidth={true} 
                       onTouchTap={this.onSubmit}/>
@@ -150,6 +153,10 @@ class SignupForm extends Component {
 
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired
+}
+
+SignupForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default SignupForm

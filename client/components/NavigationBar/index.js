@@ -6,10 +6,13 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
 
-const styles = {
+const style = {
   title: {
     cursor: 'pointer',
-    texShadow: '4px 4px 4px #aaa'
+    color: 'black'
+  },
+  button: {
+    color: 'black'
   }
 }
 
@@ -25,10 +28,10 @@ class NavigationBar extends Component {
   render() {
     return (
       <AppBar
-        title={<span className="font-effect-3d-float" style={styles.title}>Ҏ Ҥ ¥ Ț Ӭ Ԇ т ∑ Ҝ</span>}
+        title={<span className="font-effect-3d-float" style={style.title}>Ҏ Ҥ ¥ Ț Ӭ Ԇ Ŧ Ξ Ҝ</span>}
         showMenuIconButton={false}
         onTitleTouchTap={handleTouchTap}
-        iconElementRight={<FlatButton className="font-effect-3d-float" label="Sign Up" onTouchTap={handleSignupTap}/>}
+        iconElementRight={<FlatButton style={style.button} className="font-effect-3d-float" label="§ ї Ԍ ∏___ц ҏ" onTouchTap={handleSignupTap}/>}
       />
     )
   }
