@@ -1,11 +1,13 @@
 import App from './App'
 import Greetings from './Greetings'
-import SignupPage from './SignupPage'
 import NavigationBar from './NavigationBar'
+import SignupPage from './SignupPage'
+import SignupForm from './SignupForm'
 
 export {
   App,
   Greetings,
-  SignupPage,
-  NavigationBar
+  NavigationBar,
+  SignupForm,
+  SignupPage
 }

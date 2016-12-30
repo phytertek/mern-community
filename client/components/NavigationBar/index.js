@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 const styles = {
   title: {
     cursor: 'pointer',
+    texShadow: '4px 4px 4px #aaa'
   }
 }
 
@@ -24,12 +25,10 @@ class NavigationBar extends Component {
   render() {
     return (
       <AppBar
-        title={<span style={styles.title}>Phytertek</span>}
+        title={<span className="font-effect-3d-float" style={styles.title}>Ҏ Ҥ ¥ Ț Ӭ Ԇ т ∑ Ҝ</span>}
         showMenuIconButton={false}
         onTitleTouchTap={handleTouchTap}
-        iconElementRight={
-          <FlatButton label="Sign Up" onTouchTap={handleSignupTap}/>
-        }
+        iconElementRight={<FlatButton className="font-effect-3d-float" label="Sign Up" onTouchTap={handleSignupTap}/>}
       />
     )
   }
